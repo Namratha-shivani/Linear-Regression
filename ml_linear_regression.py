@@ -15,15 +15,16 @@ Original file is located at
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.model_selection import train_test_split
 
 # %matplotlib inline
 
 from IPython.display import Math, Latex, display
 
-"""# DATA
+# DATA
 
-create a data set to perform machine learning analysis on them. To start with working on single feature model with about 100 examples.
-"""
+#create a data set to perform machine learning analysis on them. To start with working on single feature model with about 100 examples.
+
 
 w0 = 5
 w1 = 3
@@ -36,9 +37,7 @@ Y = w0+w1*(X)+np.random.randn(n,)
 print(X[:5])
 print(Y[:5])
 
-"""Dividing the data to training and testing"""
-
-from sklearn.model_selection import train_test_split
+#Dividing the data to training and testing
 
 X_train, X_test, y_train, y_test = train_test_split( X, Y, test_size=0.2, random_state=42)
 
@@ -47,14 +46,14 @@ print('Shape of training label:',y_train.shape)
 print('Shape of test data:',X_test.shape)
 print('Shape of test label:',y_test.shape)
 
-"""plot the data points"""
+#plot the data points
 
 plt.title('Data Points')
 plt.plot(X_train,y_train,'b.')
 plt.xlabel('x_train')
 plt.ylabel('y_train')
 
-"""Add dummy feature x0 as 1 to the training set"""
+#Add dummy feature x0 as 1 to the training set
 
 def dummy_feature(x):
   new_x = []
@@ -71,10 +70,10 @@ weight_matrix.shape
 
 dummy_feature(X_train).shape
 
-"""# MODEL
+# MODEL
 
-Y = ∑WᵢᵀXᵢ
-"""
+# Y = ∑WᵢᵀXᵢ
+
 
 def prediction(x,w):
   pred=[]
@@ -93,12 +92,12 @@ plt.title('predicted values')
 plt.xlabel('x_train')
 plt.ylabel('y_label')
 
-"""#LOSS FUNCTION
+# LOSS FUNCTION
 
-SSE = ∑( predicted label ⁱ - actual label ⁱ )
+# SSE = ∑( predicted label ⁱ - actual label ⁱ )
 
-loss = SSE÷2
-"""
+# loss = SSE÷2
+
 
 def loss_function(y_hat,y):
   SSE = (y_hat-y)**2
@@ -113,35 +112,31 @@ loss = sum(SSE)/2
 
 print(loss_function(y_hat,y_train))
 
-"""# OPTIMIZATION
+# OPTIMIZATION
 
-Method 1 : Normal Calculation
+# Method 1 : Normal Calculation
 
 
-XᵀWX -Xᵀy = 0
+# XᵀWX -Xᵀy = 0
 
-W = (XᵀX)\^-1 Xᵀy
-"""
+# W = (XᵀX)\^-1 Xᵀy
+
 
 weight_norm = np.linalg.pinv(dummy_feature(X_train))@y_train
 
 weight_norm
 
-"""Method 2: Gradient Descent
+#Method 2: Gradient Descent
 
-> STEP1: Random initialization of weight vector
+# STEP1: Random initialization of weight vector
 
-"""
 
 w = np.zeros(weight_matrix.shape)
 
-"""
 
-> STEP2: Iterate until Convergence
+#STEP2: Iterate until Convergence
 
->> learning rate α = 0.01, Number of iterations = 50, threshold = 3
-
-"""
+# learning rate α = 0.01, Number of iterations = 50, threshold = 3
 
 alpha = 0.0001
 iterations = 2000
